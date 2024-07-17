@@ -1,4 +1,5 @@
 const express=require("express");
+
 const {shortURL}=require("../models/shortURLModel");
 const {shortURLGenerator}=require("../controller/shortURLgenerator");
 const router=express.Router();

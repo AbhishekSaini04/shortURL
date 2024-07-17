@@ -1,14 +1,20 @@
 const express=require("express");
 const app=express();
+app.set('trust proxy', true);
 const PORT=3000;
+require("dotenv").config();
+
+
 const urlRoute=require("./routes/urlRoute");
 const redirectRoute=require("./routes/redirectingToURL");
 app.use(express.json());
 const {shortURLGenerator}=require("./controller/shortURLgenerator");
 const {connectToDB}=require("./config");
 const {shortURL}=require("./models/shortURLModel");
-const fakeData=require("./fakeData.json");
-connectToDB("mongodb://localhost:27017/URLShortner");
+// const fakeData=require("./fakeData.json");
+// process.env.PORT 
+const connectionString=process.env.MONGODB_ONLINE || process.env.MONGODB_OFFLINE;
+connectToDB(connectionString);
 
 const databaseData=shortURL.find({});
 
@@ -26,6 +32,11 @@ const databaseData=shortURL.find({});
 app.use("/url",urlRoute);
 app.use("/",redirectRoute);
 app.get("/",(req,res)=>{
+    const dns = require('dns'); 
+  
+// dns.lookup() function searches 
+// for user IP address and family 
+// if there is no error  
     res.status(200).json({hello:"homePAge"});
 
 });
