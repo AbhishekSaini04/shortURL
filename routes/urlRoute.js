@@ -18,7 +18,10 @@ if(result){
     // console.log("RESULT:",result);
     const url = new URL(`${req.protocol}://${req.get('host')}${req.originalUrl}`);
     // console.log(url);
-    return res.status(200).json({shortURl:`${url.origin+"/"+generatedShortURl}`});
+    // return res.status(200).json({shortURl:`${url.origin+"/"+generatedShortURl}`});
+    return res.status(200).render("home",{
+        shortURL:`${url.origin+"/"+generatedShortURl}`,
+    });
     
 }
 }else{

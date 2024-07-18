@@ -1,0 +1,80 @@
+body{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: rgb(65, 152, 187);
+}
+
+
+div.main{
+    width: 50vw;
+    height: 20vh;
+    display: flex;
+    justify-content:space-evenly;
+    flex-direction: column;
+    align-items: center;
+
+
+    background-color: rgba(3, 3, 3, 0.315);
+}
+
+div.clipboardDiv{
+    justify-content: center;
+    align-items: center;
+    
+    margin-left: 2vw;
+    display: flex;
+    
+    width: 100%;
+    height: 40%;
+    
+}
+
+
+form{
+    justify-content: center;
+    align-items: center;
+    margin-left: 2vw;
+    width: 100%;
+    height: 40%;
+    display: flex;
+
+}
+label{
+    
+width: 12%;
+}
+
+input{
+    height: 70%;
+    width: 60%;
+}
+
+button{
+    height: 85%;
+    width: 20%;
+}
+
+
+
+@media screen and (width<=400px) {
+    body{
+        background-color: #b3d464;
+    }
+    div.main{
+        margin-top: -100px;
+        width: 100vw;
+
+    }
+    button{
+        height: 80%;
+        width: 20%;
+    }
+    
+    label{
+        font-size: smaller;
+    }
+}

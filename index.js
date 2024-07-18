@@ -1,13 +1,18 @@
 const express=require("express");
+const path=require("path");
 const app=express();
 app.set('trust proxy', true);
 const PORT=3000;
 require("dotenv").config();
 
-
+app.set("view engine","ejs");
+app.set("views",path.resolve("./views"))
+// app.set("views",path.resolve("./"))
+app.use(express.json());
+app.use(express.urlencoded({extended:false}))
+app.use(express.static('public'))
 const urlRoute=require("./routes/urlRoute");
 const redirectRoute=require("./routes/redirectingToURL");
-app.use(express.json());
 const {shortURLGenerator}=require("./controller/shortURLgenerator");
 const {connectToDB}=require("./config");
 const {shortURL}=require("./models/shortURLModel");
@@ -32,13 +37,7 @@ const databaseData=shortURL.find({});
 app.use("/url",urlRoute);
 app.use("/",redirectRoute);
 app.get("/",(req,res)=>{
-    const dns = require('dns'); 
-  
-// dns.lookup() function searches 
-// for user IP address and family 
-// if there is no error  
-    res.status(200).json({hello:"homePAge"});
-
+   res.status(200).render("home");
 });
 
 app.listen(PORT,()=>{
