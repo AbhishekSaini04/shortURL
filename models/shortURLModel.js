@@ -9,8 +9,13 @@ const shortURLSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    visitHistory:[]
-});
+    visitHistory:[],
+    createdBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"user"
+    }
+
+},{timestamps:true});
 
 const shortURL=mongoose.model("shortURL",shortURLSchema);
 
