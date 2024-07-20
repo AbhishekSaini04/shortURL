@@ -1,5 +1,5 @@
 function shortURLGenerator(n=8){
-const indicator=true;
+// const indicator=true;
     let shortURL='';
     const symbolString="aabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     for(let i=0;i<n;i++){

@@ -1,14 +1,28 @@
-const sessionIDToUserMap=new Map();
+// const sessionIDToUserMap=new Map();
+const jwt=require("jsonwebtoken");
+// const secretKey=process.env.SECRET_KEY;
 
 
-function setUser(id,user){
-    sessionIDToUserMap.set(id,user);
+function setUser(user){
+    const secretKey=process.env.SECRET_KEY;
+    const paload={
+        _id:user._id,
+    email:user.email,
+    };
+    return jwt.sign(paload,secretKey);
     
 }
 
-function getUser(id){
-    const result= sessionIDToUserMap.get(id);
-    return result;
+function getUser(token){
+    const secretKey=process.env.SECRET_KEY;
+    if(!token){return null}
+    try {
+        return jwt.verify(token,secretKey);
+        
+    } catch (error) {
+        return null;
+        
+    }
 
 }
 

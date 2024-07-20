@@ -7,8 +7,8 @@ const router=express.Router();
 router.get("/:inputURL",async(req,res)=>{
     const inputURL=req.params.inputURL;
     const result=await shortURL.findOne({shortURL:inputURL});
-    console.log('shortID:',inputURL);
-    console.log("result:",result);
+    // console.log('shortID:',inputURL);
+    // console.log("result:",result);
    
 if(result && inputURL){
     // console.log("IF");

@@ -1,6 +1,6 @@
 const express=require("express");
-const {shortURL}=require("../models/shortURLModel");
 const router=express.Router();
+const {shortURL}=require("../models/shortURLModel");
 
 router.get("/",async(req,res)=>{
     if(!req.user){return res.redirect("/login");}

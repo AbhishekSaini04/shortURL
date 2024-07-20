@@ -1,6 +1,6 @@
 const {usersModel}=require("../models/usersModel");
-const {v4:uuidV4}=require("uuid");
-const {getUser,setUser}=require("../service/userAuth");
+// const {v4:uuidV4}=require("uuid");
+const {setUser}=require("../service/userAuth");
 async function userSignupHandler(req, res){
     const {name,email,password}=req.body;
     // console.log(name,email,password);
@@ -30,8 +30,8 @@ async function userLoginHandler(req, res){
         error:"invalid username or password"
     }) ;
    }
-   const sessionID=uuidV4();
-   setUser(sessionID,user);
+//    const sessionID=uuidV4();
+  const sessionID= setUser(user);
 //    setUser("astro","astroprime");
 //    log
    res.cookie("uid",sessionID)
