@@ -32,9 +32,9 @@ async function userLoginHandler(req, res){
    }
 //    const sessionID=uuidV4();
   const sessionID= setUser(user);
-//    setUser("astro","astroprime");
-//    log
-   res.cookie("uid",sessionID)
+
+//    86400000 milliseconds in 1 day
+   res.cookie("uid",sessionID,{maxAge:86400000*10});
    return res.redirect("/");
 }
 module.exports={userSignupHandler,userLoginHandler}
