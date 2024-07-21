@@ -1,9 +1,16 @@
 const express=require("express");
 const router=express.Router();
 const {shortURL}=require("../models/shortURLModel");
+const {restrictTo}=require("../middlewares/auth")
 
-router.get("/",async(req,res)=>{
-    if(!req.user){return res.redirect("/login");}
+router.get("/admin/urls",restrictTo(["ADMIN"]),async(req,res)=>{
+    const allUrls=await shortURL.find({});
+    return res.render("home",{
+        urls:allUrls
+    });
+});
+router.get("/",restrictTo(["NORMAL","ADMIN"]),async(req,res)=>{
+    // if(!req.user){return res.redirect("/login");}
     
 
     const allUrls=await shortURL.find({createdBy:req.user._id});
