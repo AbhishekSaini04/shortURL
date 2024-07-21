@@ -30,11 +30,12 @@ async function userLoginHandler(req, res){
         error:"invalid username or password"
     }) ;
    }
-//    const sessionID=uuidV4();
-  const sessionID= setUser(user);
+
+  const token= setUser(user);
 
 //    86400000 milliseconds in 1 day
-   res.cookie("uid",sessionID,{maxAge:86400000*10});
+// cookie is available for 10 days
+   res.cookie("token",token,{maxAge:86400000*10});
    return res.redirect("/");
 }
 module.exports={userSignupHandler,userLoginHandler}

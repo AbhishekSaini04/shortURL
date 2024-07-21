@@ -1,4 +1,5 @@
-const {restrictUserToLoggedIn, checkAuth}=require("./middlewares/auth")
+// const {restrictUserToLoggedIn, checkAuth}=require("./middlewares/auth")
+const {checkForAuthorization,restrictTo}=require("./middlewares/auth")
 const cookieParser=require("cookie-parser");
 const express=require("express");
 const app=express();
@@ -15,7 +16,8 @@ app.set("views",path.resolve("./views"))
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended:false}))
-app.use(express.static('public'))
+app.use(express.static('public'));
+app.use(checkForAuthorization);
 
 // routes requiring
 const urlRoute=require("./routes/urlRoute");
@@ -34,11 +36,11 @@ connectToDB(connectionString);
 
 
 // routes
-app.use("/url",restrictUserToLoggedIn,urlRoute);
+app.use("/url",restrictTo(["NORMAL","ADMIN"]),urlRoute);
 app.use("/rd",redirectRoute);
 app.use("/",userRoute);
-app.use("/",checkAuth,staticRoute);
+app.use("/",staticRoute);
 
 app.listen(PORT,()=>{
     console.log("Server Runnin on PORT:",PORT);
-})
+});

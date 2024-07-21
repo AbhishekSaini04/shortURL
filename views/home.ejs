@@ -39,8 +39,8 @@
 
 </div>
 
+<h3>Other URLs Created by You</h3>
 <% if (locals.urls) { let i=1; %>
-    <h3>Other URLs Created by You</h3>
         <table border="1px">
             <tr style="color: rgb(17, 41, 3);">
               <th>Sr. No.       </th>
@@ -55,7 +55,7 @@
             <td><%= url.redirectURL %></td>
             <td><%= url.shortURL %></td>
             <td><%= url.visitHistory.length %> </td>
-        </tr> <br>
+        </tr>
  
   
  <% i++; }) %>

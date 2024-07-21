@@ -1,27 +1,44 @@
 const {getUser}=require("../service/userAuth");
 
-function restrictUserToLoggedIn(req,res,next){
-    const sessionID=req.cookies?.uid;
-    // console.log("cookie:",sessionID);
-    // console.log(req.cookies?.uid);
-    // console.log(req.headers.cookie.uid);
-    //console.log(req.cookie?.uid);
-    if(!sessionID){return res.redirect("/login");}
-    const user=getUser(sessionID);
-    // console.log("user:",user);
-    if(!user){return res.redirect("/login")};
- req.user=user;
- next();
+function checkForAuthorization(req,res,next){
+    const tokenCookie=req.cookies?.token;
+    req.user=null;
+    if(!tokenCookie){return next()}
+    const user=getUser(tokenCookie);
+
+    req.user=user;
+   return next();
+
+
+
 
 }
 
-async function checkAuth(req,res,next){
-    const sessionID=req.cookies?.uid;
-   
-    const user=getUser(sessionID);
- req.user=user;
- next();
-
+function restrictTo(roles=[]){
+    return function (req,res,next){
+        if(!req.user){return res.redirect("/login");}
+        if(!roles.includes(req.user.role)){return res.end("UNAUTHORIZED");}
+        return next();
+    }
 }
 
-module.exports={restrictUserToLoggedIn,checkAuth}
+// function restrictUserToLoggedIn(req,res,next){
+//     const tokenCookie=req.cookies?.token;
+//     if(!tokenCookie){return res.redirect("/login");}
+//     const user=getUser(tokenCookie);
+//     if(!user){return res.redirect("/login")};
+//  req.user=user;
+//  next();
+
+// }
+
+// async function checkAuth(req,res,next){
+//     const tokenCookie=req.cookies?.token;
+//     const user=getUser(tokenCookie);
+//  req.user=user;
+//  next();
+
+// }
+
+// module.exports={restrictUserToLoggedIn,checkAuth,checkAuthorization}
+module.exports={restrictTo,checkForAuthorization}

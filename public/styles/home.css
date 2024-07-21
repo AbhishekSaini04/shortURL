@@ -1,6 +1,6 @@
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: 90vh;
+    /* height: 90vh; */
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -11,6 +11,8 @@ body{
 
 
 div.main{
+    position: relative;
+    top: 0px;
     width: 50vw;
     height: 20vh;
     display: flex;
@@ -66,7 +68,7 @@ button{
         background-color: #b3d464;
     }
     div.main{
-        margin-top: -100px;
+        margin-top: 0px;
         width: 100vw;
 
     }

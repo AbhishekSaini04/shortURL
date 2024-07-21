@@ -8,6 +8,7 @@ function setUser(user){
     const paload={
         _id:user._id,
     email:user.email,
+    role:user.role,
     };
     return jwt.sign(paload,secretKey);
     
